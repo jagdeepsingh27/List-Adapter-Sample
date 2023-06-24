@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#6D6E74"
+    tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
+
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/statusImageView"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:src= "@drawable/ic_play"
+        android:theme="@style/ShapeAppearanceOverlay.App.CornerSize10Percent"
+        app:tint="?colorOnSurface"
+        android:layout_margin="8dp"
+        app:contentPadding="4dp" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/titleTextView"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="8dp"
+        android:singleLine="true"
+        android:ellipsize="end"
+        tools:text="Item Title"
+        app:layout_constraintStart_toEndOf="@id/statusImageView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/descriptionTextView"
+        app:layout_constraintEnd_toStartOf="@id/titleBarrier"
+        app:layout_constraintVertical_chainStyle="spread"
+        android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+        android:textColor="@color/black" />
+
+
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/descriptionTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="8dp"
+        android:singleLine="true"
+        android:ellipsize="end"
+        tools:text="Category View"
+        app:layout_constraintTop_toBottomOf="@id/titleTextView"
+        app:layout_constraintStart_toEndOf="@id/statusImageView"
+        app:layout_constraintEnd_toStartOf="@id/titleBarrier"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_chainStyle="spread"
+        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+        android:textColor="?colorOnSurface" />
+
+
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/titleBarrier"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        app:constraint_referenced_ids="titleTextView,descriptionTextView"
+        app:barrierDirection="end" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/amountTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:paddingEnd="4dp"
+        android:ellipsize="end"
+        tools:text="100"
+        app:layout_constraintStart_toStartOf="@id/titleBarrier"
+        app:layout_constraintEnd_toStartOf="@id/deleteOptionImageView"
+        app:layout_constraintVertical_chainStyle="spread"
+        app:layout_constraintBottom_toTopOf="@id/statusTypeTextView"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="?colorOnSurface"
+        android:gravity="center_vertical|end" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/statusTypeTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/amountTextView"
+        android:paddingHorizontal="4dp"
+        android:ellipsize="end"
+        android:singleLine="true"
+        tools:text="Completed"
+        app:layout_constraintStart_toStartOf="@id/titleBarrier"
+        app:layout_constraintEnd_toStartOf="@id/deleteOptionImageView"
+        app:layout_constraintVertical_chainStyle="spread"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="?colorOnSurface"
+        android:gravity="end" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/deleteOptionImageView"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:src= "@android:drawable/ic_delete"
+        android:theme="@style/ShapeAppearanceOverlay.App.CornerSize10Percent"
+        app:tint="#33444B"
+        android:layout_margin="8dp"
+        app:contentPadding="4dp" />
+
+</merge>

@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">List Adapter Sample</string>
+    <string name="button_label_refresh_data">Refresh Data</string>
+</resources>
