@@ -1,5 +1,6 @@
 package com.jcoding.listadaptersample.ui
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -13,7 +14,10 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class ListViewModel(private val dataSource: ListItemMockDataSource) : ViewModel() {
-
+    companion object{
+        private const val TAG = "ListViewModel"
+    }
+    private var pageNo = 1
 
     private var itemList  = mutableListOf<ListItemData>()
     private val _itemListLiveData = MutableLiveData<List<ListItemData>>()
@@ -23,11 +27,19 @@ class ListViewModel(private val dataSource: ListItemMockDataSource) : ViewModel(
     private fun fetchListData() {
         fetchListJob?.cancel()
         fetchListJob = viewModelScope.launch {
-            val list = dataSource.getAdapterItemList()
-            itemList.addAll(list)
+            Log.i(TAG,"list called page no $pageNo")
+            val list = dataSource.getAdapterItemList(pageNo)
+            itemList = itemList.toMutableList().apply {  addAll(list)}
             _itemListLiveData.value = itemList
         }
     }
+
+
+    fun loadMore(){
+        pageNo++
+        fetchListData()
+    }
+
 
     fun changeItemStatus(requestedItem: ListItemData) {
         viewModelScope.launch(Dispatchers.Default) {
@@ -73,6 +85,7 @@ class ListViewModel(private val dataSource: ListItemMockDataSource) : ViewModel(
 
 
     fun refreshList(){
+        pageNo = 1
         itemList = itemList.toMutableList().apply { clear() }
         fetchListData()
     }

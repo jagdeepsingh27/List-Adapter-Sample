@@ -14,7 +14,11 @@ import java.nio.charset.Charset
 
 
 class ListItemMockDataSource(private val context: Context) {
+    companion object{
+        private const val ITEM_PER_PAGE = 10
+    }
     private var rawDataList: ArrayList<MockDataItemModel>? = null
+
 
     private fun initMockRawData() {
         try {
@@ -35,15 +39,35 @@ class ListItemMockDataSource(private val context: Context) {
         }
     }
 
-    suspend fun getAdapterItemList(): ArrayList<ListItemData> = withContext(Dispatchers.IO) {
-        initMockRawData()
+    suspend fun getAdapterItemList(pageNo : Int = 1) : ArrayList<ListItemData> = withContext(Dispatchers.IO) {
+        if(rawDataList == null){
+            initMockRawData()
+        }
         val dataList = rawDataList ?: return@withContext arrayListOf()
         val list = ArrayList<ListItemData>()
-        for ((id, i) in (0 until dataList.size).withIndex()) {
-            list.add(generateFakeItem(id, dataList[i]))
+
+        val startIndex = (pageNo - 1) * ITEM_PER_PAGE
+
+        if(startIndex > dataList.size -1 ){
+            return@withContext arrayListOf()
+        }
+
+        var endIndex = startIndex + ITEM_PER_PAGE
+        if(endIndex > dataList.size){
+            endIndex = dataList.size
+        }
+        endIndex -= 1
+
+        for(i in startIndex..endIndex ){
+            val item = dataList[i]
+            list.add(generateFakeItem(i,item))
         }
         return@withContext list
     }
+
+
+
+
 
     private fun generateFakeItem(_id: Int, data: MockDataItemModel): ListItemData {
         val randomNumber = (1..10).random()
@@ -56,4 +80,6 @@ class ListItemMockDataSource(private val context: Context) {
             status = if (_id % randomNumber == 0) ListItemStatus.PLAY else ListItemStatus.PAUSE,
         )
     }
+
+
 }
