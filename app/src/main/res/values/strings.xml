@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">List Adapter Sample</string>
     <string name="button_label_refresh_data">Refresh Data</string>
+    <string name="label_delete_item">Delete</string>
+    <string name="label_cancel_delete_item">Cancel</string>
+    <string name="title_delete_item_dialog">Delete Item?</string>
 </resources>
