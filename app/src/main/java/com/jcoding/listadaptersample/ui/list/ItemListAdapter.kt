@@ -14,7 +14,6 @@ class ItemListAdapter() : ListAdapter<ListItemData, ItemListAdapter.ItemViewHold
 ) {
     interface Callback {
         fun onStatusIconClick(item: ListItemData)
-        fun onDeleteOptionClick(item: ListItemData)
     }
     private var callback: Callback? = null
 
@@ -54,10 +53,6 @@ class ItemListAdapter() : ListAdapter<ListItemData, ItemListAdapter.ItemViewHold
             binding.listItemView.setCallback(object : CustomListItemView.Callback{
                 override fun onStatusIconClick() {
                      callback?.onStatusIconClick(item)
-                }
-
-                override fun onDeleteOptionClick() {
-                    callback?.onDeleteOptionClick(item)
                 }
             })
         }

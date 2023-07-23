@@ -15,7 +15,6 @@ class CustomListItemView(context: Context, attrs: AttributeSet) : ConstraintLayo
 
     interface Callback {
         fun onStatusIconClick()
-        fun onDeleteOptionClick()
     }
 
     private var callback: Callback? = null
@@ -43,9 +42,6 @@ class CustomListItemView(context: Context, attrs: AttributeSet) : ConstraintLayo
         }
         binding.statusImageView.setOnClickListener {
             callback?.onStatusIconClick()
-        }
-        binding.deleteOptionImageView.setOnClickListener {
-            callback?.onDeleteOptionClick()
         }
     }
 }

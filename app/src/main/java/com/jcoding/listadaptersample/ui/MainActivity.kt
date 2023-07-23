@@ -69,10 +69,6 @@ class MainActivity : AppCompatActivity() {
         override fun onStatusIconClick(item: ListItemData) {
             listViewModel.changeItemStatus(item)
         }
-
-        override fun onDeleteOptionClick(item: ListItemData) {
-            listViewModel.removeItem(item)
-        }
     }
 
     private fun enableSwipeToDeleteAndUndo() {

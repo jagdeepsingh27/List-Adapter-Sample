@@ -15,18 +15,19 @@ import androidx.recyclerview.widget.RecyclerView
 
 
 
-abstract class ListItemSwipeCallback internal constructor(var mContext: Context) :
+abstract class ListItemSwipeCallback internal constructor(var context: Context) :
     ItemTouchHelper.Callback() {
     private val mClearPaint: Paint = Paint()
     private val mBackground: ColorDrawable = ColorDrawable()
-    private val backgroundColor: Int = Color.parseColor("#b80f0a")
+    private val backgroundColor: Int = Color.RED
     private val deleteDrawable: Drawable?
     private val intrinsicWidth: Int
     private val intrinsicHeight: Int
 
     init {
         mClearPaint.xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR)
-        deleteDrawable = ContextCompat.getDrawable(mContext, R.drawable.ic_delete)
+        deleteDrawable = ContextCompat.getDrawable(context, R.drawable.ic_delete)
+        deleteDrawable!!.setTint(Color.WHITE)
         intrinsicWidth = deleteDrawable!!.intrinsicWidth
         intrinsicHeight = deleteDrawable.intrinsicHeight
     }
@@ -74,7 +75,7 @@ abstract class ListItemSwipeCallback internal constructor(var mContext: Context)
         }
         mBackground.color = backgroundColor
         mBackground.setBounds(
-            itemView.right + dX.toInt()/5,
+            itemView.right + dX.toInt()/5 ,
             itemView.top,
             itemView.right,
             itemView.bottom
@@ -88,7 +89,7 @@ abstract class ListItemSwipeCallback internal constructor(var mContext: Context)
         val deleteIconRight = itemView.right - deleteIconMargin
         val deleteIconBottom = deleteIconTop + intrinsicHeight
         deleteDrawable!!.setBounds(deleteIconLeft, deleteIconTop, deleteIconRight, deleteIconBottom)
-        if((itemView.right + dX.toInt()/5) <   (itemView.right - intrinsicWidth)){
+        if((itemView.right + dX.toInt()/5) <   (itemView.right - deleteIconMargin - intrinsicWidth)){
             deleteDrawable.draw(c)
         }
 
