@@ -1,5 +1,6 @@
 package com.jcoding.listadaptersample.ui.list
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
@@ -36,13 +37,14 @@ class ItemListAdapter() : ListAdapter<ListItemData, ItemListAdapter.ItemViewHold
         position: Int,
         payloads: MutableList<Any>
     ) {
-        val diff = (
-                payloads.filterIsInstance<ListItemPayloadDiff>()
-                    .takeIf { it.isNotEmpty() }
-                    ?: listOf(ListItemPayloadDiff.getFullPayload())
-                ).fold(ListItemPayloadDiff.getEmptyPayload(), ListItemPayloadDiff::plus)
+//        val diff = (
+//                payloads.filterIsInstance<ListItemPayloadDiff>()
+//                    .takeIf { it.isNotEmpty() }
+//                    ?: listOf(ListItemPayloadDiff.getFullPayload())
+//                ).fold(ListItemPayloadDiff.getEmptyPayload(), ListItemPayloadDiff::plus)
 
-        holder.onBind(getItem(position), diff)
+        val payload = payloads.firstOrNull() as? ListItemPayloadDiff ?: ListItemPayloadDiff.getFullPayload()
+        holder.onBind(getItem(position), payload)
     }
 
     inner class ItemViewHolder(val binding: ItemListAdapterItemLayoutBinding) :
